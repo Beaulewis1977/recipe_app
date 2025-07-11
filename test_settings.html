@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Test Settings</title>
+</head>
+<body>
+    <h1>Setting Test Settings for Recipe Slot</h1>
+    <button onclick="setTestSettings()">Set Test Settings</button>
+    <button onclick="clearSettings()">Clear Settings</button>
+    <div id="status"></div>
+
+    <script>
+        function setTestSettings() {
+            const testSettings = {
+                id: 1,
+                servingsDefault: 2,
+                measurementUnits: 'US',
+                dietaryFilters: ['Vegetarian'],
+                allergies: ['Dairy', 'Nuts'],
+                maxSpiciness: 6,
+                hasSeenSwipeOverlay: false,
+                showAllergyWarning: true,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+            };
+            
+            localStorage.setItem('userSettings', JSON.stringify(testSettings));
+            document.getElementById('status').innerHTML = '<p style="color: green;">Test settings saved! Settings: ' + JSON.stringify(testSettings, null, 2) + '</p>';
+            console.log('Test settings saved:', testSettings);
+        }
+        
+        function clearSettings() {
+            localStorage.removeItem('userSettings');
+            document.getElementById('status').innerHTML = '<p style="color: red;">Settings cleared!</p>';
+            console.log('Settings cleared');
+        }
+        
+        // Check current settings
+        function checkSettings() {
+            const current = localStorage.getItem('userSettings');
+            if (current) {
+                console.log('Current settings:', JSON.parse(current));
+                document.getElementById('status').innerHTML = '<p>Current settings: ' + current + '</p>';
+            } else {
+                console.log('No settings found');
+                document.getElementById('status').innerHTML = '<p>No settings found</p>';
+            }
+        }
+        
+        // Auto-check on load
+        checkSettings();
+    </script>
+</body>
+</html>

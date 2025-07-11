@@ -1,0 +1,123 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/recipe_slot_app/app/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id                Int      @id @default(autoincrement())
+  spoonacularId     Int      @unique
+  title             String
+  image             String?
+  readyInMinutes    Int?
+  servings          Int?
+  sourceUrl         String?
+  summary           String?
+  instructions      String?
+  ingredients       Json     // Array of ingredients
+  nutrition         Json?    // Nutrition info
+  spiciness         Int      @default(0) // 0 = Not Spicy, 1-5 = Spiciness levels
+  allergens         String[] // Array of allergen strings
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  // Relations
+  savedRecipes      SavedRecipe[]
+  triedRecipes      TriedRecipe[]
+  groceryListItems  GroceryListItem[]
+}
+
+model SavedRecipe {
+  id        Int      @id @default(autoincrement())
+  recipeId  Int
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  savedAt   DateTime @default(now())
+  
+  @@unique([recipeId])
+}
+
+model TriedRecipe {
+  id        Int      @id @default(autoincrement())
+  recipeId  Int
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  rating    Int?     // 1-5 stars
+  notes     String?
+  triedAt   DateTime @default(now())
+  
+  @@unique([recipeId])
+}
+
+model UserSettings {
+  id                    Int      @id @default(autoincrement())
+  servingsDefault       Int      @default(2)
+  measurementUnits      String   @default("US") // "US" or "Metric"
+  dietaryFilters        String[] // ["vegetarian", "vegan", etc.]
+  allergies             String[] // ["dairy", "nuts", "gluten", etc.]
+  maxSpiciness          Int      @default(6) // 0 = Not Spicy, 1-5 = Max spiciness levels, 6 = Any level
+  hasSeenSwipeOverlay   Boolean  @default(false)
+  showAllergyWarning    Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model PantryIngredient {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  addedAt     DateTime @default(now())
+  lastUsedAt  DateTime @default(now())
+}
+
+model GroceryList {
+  id          Int               @id @default(autoincrement())
+  name        String            @default("My Grocery List")
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  items       GroceryListItem[]
+}
+
+model GroceryListItem {
+  id            Int         @id @default(autoincrement())
+  groceryListId Int
+  groceryList   GroceryList @relation(fields: [groceryListId], references: [id], onDelete: Cascade)
+  name          String
+  amount        Float?
+  unit          String?
+  category      String?     // "produce", "dairy", "meat", etc.
+  priority      String      @default("medium") // "high", "medium", "low"
+  storeSection  String?     // "entrance", "produce", "deli", "bakery", "dairy", "meat", "frozen", "pantry", "checkout"
+  isCompleted   Boolean     @default(false)
+  recipeId      Int?        // Optional reference to source recipe
+  recipe        Recipe?     @relation(fields: [recipeId], references: [id], onDelete: SetNull)
+  addedAt       DateTime    @default(now())
+  
+  @@unique([groceryListId, name]) // Prevent duplicate items in same list
+}
+
+model GroceryListTemplate {
+  id          Int                      @id @default(autoincrement())
+  name        String
+  description String?
+  items       GroceryListTemplateItem[]
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+}
+
+model GroceryListTemplateItem {
+  id         Int                  @id @default(autoincrement())
+  templateId Int
+  template   GroceryListTemplate  @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  name       String
+  amount     Float?
+  unit       String?
+  category   String?
+  createdAt  DateTime             @default(now())
+}

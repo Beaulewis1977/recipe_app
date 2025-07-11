@@ -1,0 +1,77 @@
+name: recipe_slot_app
+description: A Flutter mobile app that replicates the Recipe Slot App design and functionality.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # HTTP requests for Spoonacular API
+  http: ^1.1.2
+  dio: ^5.4.0
+  
+  # State management
+  flutter_riverpod: ^2.4.9
+  
+  # UI Components
+  cupertino_icons: ^1.0.6
+  
+  # Slot machine animation
+  slot_machine_roller: ^1.0.0
+  
+  # Swipe cards
+  flutter_card_swiper: ^7.0.2
+  
+  # Local storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+
+  
+  # Image handling
+  cached_network_image: ^3.3.1
+  
+  # Navigation
+  go_router: ^12.1.3
+  
+  # Animations
+  lottie: ^2.7.0
+  
+  # Utils
+  shared_preferences: ^2.2.2
+  path_provider: ^2.1.2
+  
+  # JSON serialization
+  json_annotation: ^4.8.1
+  
+  # Logging
+  logger: ^2.0.2+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  
+  # Code generation
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+  hive_generator: ^2.0.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/icons/
+  
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
