@@ -55,17 +55,15 @@ Future<void> pumpTestApp(
     });
   }
 
-  // Mock network images to prevent HTTP requests during tests
-  await mockNetworkImages(() async {
-    await tester.pumpWidget(
-      TestApp(
-        overrides: overrides,
-        theme: theme,
-        locale: locale,
-        child: child,
-      ),
-    );
-  });
+  // Pump the widget directly
+  await tester.pumpWidget(
+    TestApp(
+      overrides: overrides,
+      theme: theme,
+      locale: locale,
+      child: child,
+    ),
+  );
 }
 
 /// Pumps a widget with responsive testing setup
@@ -164,7 +162,7 @@ class TestUtils {
     Finder finder,
     Offset offset,
   ) async {
-    await tester.scroll(finder, offset, 100);
+    await tester.drag(finder, offset);
     await pumpAndSettleWithTimeout(tester);
   }
 }
@@ -173,8 +171,9 @@ class TestUtils {
 extension WidgetTesterExtensions on WidgetTester {
   /// Gets the ProviderContainer from the current widget tree
   ProviderContainer container() {
-    final scope = widget<ProviderScope>(find.byType(ProviderScope));
-    return scope.container;
+    final element = this.element(find.byType(ProviderScope));
+    final scope = element.widget as ProviderScope;
+    return ProviderScope.containerOf(element);
   }
 
   /// Pumps the widget tree and waits for animations with timeout

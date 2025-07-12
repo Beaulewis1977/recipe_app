@@ -111,3 +111,24 @@ lcov.info
 # Hive database files
 *.hive
 *.lock
+
+# Large files that should never be committed
+flutter.tar.xz
+*.tar.xz
+*.tar.gz
+
+# API client downloads
+spoonacular-api-clients/
+*-client.zip
+
+# Flutter SDK (should be installed separately)
+flutter/
+
+# Large build artifacts
+*.dill
+*.snapshot
+*.cache.dill.track.dill
+
+# Search results and temporary files
+rg_hits.txt
+file_list.txt

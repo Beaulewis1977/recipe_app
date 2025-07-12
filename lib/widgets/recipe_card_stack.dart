@@ -137,8 +137,8 @@ class _RecipeCardStackState extends State<RecipeCardStack> {
                 },
                 child: RecipeCard(
                   recipe: recipe,
-                  horizontalThreshold: horizontalThreshold,
-                  verticalThreshold: verticalThreshold,
+                  horizontalThreshold: horizontalThreshold.toDouble(),
+                  verticalThreshold: verticalThreshold.toDouble(),
                 ),
               );
             },
