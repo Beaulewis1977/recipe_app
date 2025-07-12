@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recipe_slot_app/core/responsive/screen_size.dart';
+import 'package:recipe_slot_app/core/responsive/responsive_builder.dart';
 
 void main() {
   group('ScreenSize', () {

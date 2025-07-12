@@ -11,55 +11,57 @@ dependencies:
     sdk: flutter
   
   # HTTP requests for Spoonacular API
-  http: ^1.1.2
-  dio: ^5.4.0
-  
+  http: ^1.2.2
+  dio: ^5.7.0
+
   # State management
-  flutter_riverpod: ^2.4.9
-  
+  flutter_riverpod: ^2.6.1
+
   # UI Components
-  cupertino_icons: ^1.0.6
-  
+  cupertino_icons: ^1.0.8
+
   # Slot machine animation
   slot_machine_roller: ^1.0.0
-  
+
   # Swipe cards
   flutter_card_swiper: ^7.0.2
-  
+
   # Local storage
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  
 
-  
   # Image handling
-  cached_network_image: ^3.3.1
-  
+  cached_network_image: ^3.4.1
+
   # Navigation
-  go_router: ^12.1.3
-  
+  go_router: ^16.0.0
+
   # Animations
-  lottie: ^2.7.0
-  
+  lottie: ^3.3.1
+
   # Utils
-  shared_preferences: ^2.2.2
-  path_provider: ^2.1.2
-  
+  shared_preferences: ^2.3.2
+  path_provider: ^2.1.5
+
   # JSON serialization
-  json_annotation: ^4.8.1
-  
+  json_annotation: ^4.9.0
+
   # Logging
-  logger: ^2.0.2+1
+  logger: ^2.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
-  
+  flutter_lints: ^6.0.0
+
   # Code generation
-  build_runner: ^2.4.7
-  json_serializable: ^6.7.1
+  build_runner: ^2.4.13
+  json_serializable: ^6.8.0
   hive_generator: ^2.0.1
+
+  # Testing utilities
+  mockito: ^5.4.4
+  build_test: ^2.2.2
 
 flutter:
   uses-material-design: true

@@ -258,6 +258,9 @@ class _RecipeCardStackState extends State<RecipeCardStack> {
       case CardSwiperDirection.bottom:
         // Handle swipe down if needed
         break;
+      case CardSwiperDirection.none:
+        // No action needed for none direction
+        break;
     }
     
     return true;

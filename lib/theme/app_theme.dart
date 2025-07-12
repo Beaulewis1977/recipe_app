@@ -17,15 +17,15 @@ class AppTheme {
       primarySwatch: MaterialColor(
         primaryColor.value,
         <int, Color>{
-          50: primaryColor.withOpacity(0.1),
-          100: primaryColor.withOpacity(0.2),
-          200: primaryColor.withOpacity(0.3),
-          300: primaryColor.withOpacity(0.4),
-          400: primaryColor.withOpacity(0.5),
+          50: primaryColor.withValues(alpha: 0.1),
+          100: primaryColor.withValues(alpha: 0.2),
+          200: primaryColor.withValues(alpha: 0.3),
+          300: primaryColor.withValues(alpha: 0.4),
+          400: primaryColor.withValues(alpha: 0.5),
           500: primaryColor,
-          600: primaryColor.withOpacity(0.7),
-          700: primaryColor.withOpacity(0.8),
-          800: primaryColor.withOpacity(0.9),
+          600: primaryColor.withValues(alpha: 0.7),
+          700: primaryColor.withValues(alpha: 0.8),
+          800: primaryColor.withValues(alpha: 0.9),
           900: primaryColor,
         },
       ),
@@ -34,11 +34,9 @@ class AppTheme {
         primary: primaryColor,
         secondary: secondaryColor,
         surface: surfaceColor,
-        background: backgroundColor,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: textPrimaryColor,
-        onBackground: textPrimaryColor,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: backgroundColor,
@@ -50,14 +48,14 @@ class AppTheme {
         ),
         iconTheme: IconThemeData(color: textPrimaryColor),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarTheme(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: surfaceColor,
         selectedItemColor: primaryColor,
         unselectedItemColor: textSecondaryColor,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData(
         color: cardColor,
         elevation: 8,
         shape: RoundedRectangleBorder(

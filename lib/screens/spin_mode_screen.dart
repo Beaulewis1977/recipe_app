@@ -173,7 +173,7 @@ class _SpinModeScreenState extends ConsumerState<SpinModeScreen> {
             ),
           ),
         ],
-      ),
+      );
     } else {
       // Tablet/Desktop layout - side by side
       return Row(
@@ -315,10 +315,9 @@ class _SpinModeScreenState extends ConsumerState<SpinModeScreen> {
           ),
         ],
       );
-    }
-  },
+        }
+      },
         ),
-      ),
     );
   }
 
