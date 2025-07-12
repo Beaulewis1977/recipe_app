@@ -1,0 +1,108 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "title": "Spaghetti Carbonara",
+      "image": "https://example.com/carbonara.jpg",
+      "readyInMinutes": 25,
+      "servings": 4,
+      "ingredients": [
+        "400g spaghetti",
+        "200g pancetta",
+        "4 large eggs",
+        "100g Pecorino Romano cheese",
+        "Black pepper",
+        "Salt"
+      ],
+      "instructions": "1. Cook spaghetti in salted boiling water until al dente.\n2. Fry pancetta until crispy.\n3. Whisk eggs with grated cheese and black pepper.\n4. Combine hot pasta with pancetta, then add egg mixture.\n5. Toss quickly to create creamy sauce.\n6. Serve immediately with extra cheese.",
+      "cuisines": ["Italian"],
+      "dishTypes": ["main course", "dinner"]
+    },
+    {
+      "id": 2,
+      "title": "Chicken Tikka Masala",
+      "image": "https://example.com/tikka-masala.jpg",
+      "readyInMinutes": 45,
+      "servings": 6,
+      "ingredients": [
+        "1kg chicken breast",
+        "400ml coconut milk",
+        "400g canned tomatoes",
+        "2 onions",
+        "Ginger and garlic",
+        "Garam masala",
+        "Turmeric",
+        "Cumin",
+        "Coriander"
+      ],
+      "instructions": "1. Marinate chicken in yogurt and spices.\n2. Grill chicken until cooked through.\n3. Sauté onions, ginger, and garlic.\n4. Add tomatoes and spices, cook until thick.\n5. Add coconut milk and grilled chicken.\n6. Simmer for 15 minutes.\n7. Serve with rice and naan.",
+      "cuisines": ["Indian"],
+      "dishTypes": ["main course", "dinner"]
+    },
+    {
+      "id": 3,
+      "title": "Caesar Salad",
+      "image": "https://example.com/caesar-salad.jpg",
+      "readyInMinutes": 15,
+      "servings": 2,
+      "ingredients": [
+        "Romaine lettuce",
+        "Parmesan cheese",
+        "Croutons",
+        "Caesar dressing",
+        "Anchovies (optional)",
+        "Lemon juice"
+      ],
+      "instructions": "1. Wash and chop romaine lettuce.\n2. Make croutons from day-old bread.\n3. Prepare Caesar dressing with anchovies.\n4. Toss lettuce with dressing.\n5. Add croutons and grated Parmesan.\n6. Serve immediately.",
+      "cuisines": ["American"],
+      "dishTypes": ["salad", "side dish", "lunch"]
+    }
+  ],
+  "randomRecipesResponse": {
+    "recipes": [
+      {
+        "id": 101,
+        "title": "Random Recipe 1",
+        "image": "https://example.com/random1.jpg",
+        "readyInMinutes": 30,
+        "servings": 4,
+        "ingredients": ["Random ingredient 1", "Random ingredient 2"],
+        "instructions": "Random instructions 1",
+        "cuisines": ["Random Cuisine"],
+        "dishTypes": ["main course"]
+      },
+      {
+        "id": 102,
+        "title": "Random Recipe 2",
+        "image": "https://example.com/random2.jpg",
+        "readyInMinutes": 20,
+        "servings": 2,
+        "ingredients": ["Random ingredient 3", "Random ingredient 4"],
+        "instructions": "Random instructions 2",
+        "cuisines": ["Another Cuisine"],
+        "dishTypes": ["appetizer"]
+      }
+    ]
+  },
+  "searchByIngredientsResponse": [
+    {
+      "id": 201,
+      "title": "Search Result 1",
+      "image": "https://example.com/search1.jpg",
+      "readyInMinutes": 35,
+      "servings": 3,
+      "ingredients": ["Search ingredient 1", "Search ingredient 2"],
+      "instructions": "Search instructions 1",
+      "cuisines": ["Search Cuisine"],
+      "dishTypes": ["main course"]
+    }
+  ],
+  "emptyResponse": {
+    "recipes": []
+  },
+  "errorResponse": {
+    "code": 402,
+    "message": "Limited plan. Upgrade to premium",
+    "status": "failure"
+  }
+}
