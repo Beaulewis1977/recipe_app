@@ -80,32 +80,38 @@ class MockTriedRecipesNotifier extends StateNotifier<List<Recipe>> {
 class MockUserSettingsNotifier extends StateNotifier<UserSettings> {
   MockUserSettingsNotifier() : super(UserSettings.defaultSettings);
 
+  void updateSettings(UserSettings newSettings) {
+    state = newSettings;
+  }
+
   void updateApiKey(String apiKey) {
-    state = state.copyWith(apiKey: apiKey);
+    final newSettings = state.copyWith(apiKey: apiKey);
+    updateSettings(newSettings);
   }
 
   void updateAllergies(List<String> allergies) {
-    state = state.copyWith(allergies: allergies);
+    final newSettings = state.copyWith(allergies: allergies);
+    updateSettings(newSettings);
   }
 
   void updateDiets(List<String> diets) {
-    state = state.copyWith(diets: diets);
+    final newSettings = state.copyWith(diets: diets);
+    updateSettings(newSettings);
   }
 
   void updateCuisines(List<String> cuisines) {
-    state = state.copyWith(cuisines: cuisines);
+    final newSettings = state.copyWith(cuisines: cuisines);
+    updateSettings(newSettings);
   }
 
-  void updateExcludeIngredients(List<String> excludeIngredients) {
-    state = state.copyWith(excludeIngredients: excludeIngredients);
+  void updateExcludeIngredients(List<String> ingredients) {
+    final newSettings = state.copyWith(excludeIngredients: ingredients);
+    updateSettings(newSettings);
   }
 
-  void updateMaxReadyTime(int maxReadyTime) {
-    state = state.copyWith(maxReadyTime: maxReadyTime);
-  }
-
-  void toggleDarkMode() {
-    state = state.copyWith(darkMode: !state.darkMode);
+  void updateMaxReadyTime(int maxTime) {
+    final newSettings = state.copyWith(maxReadyTime: maxTime);
+    updateSettings(newSettings);
   }
 }
 

@@ -14,6 +14,7 @@
 [Demo](#demo) •
 [Installation](#installation) •
 [Usage](#usage) •
+[Testing](#testing) •
 [Architecture](#architecture) •
 [Contributing](#contributing) •
 [License](#license)
@@ -248,6 +249,12 @@ flutter build web --release
 ```
 
 ## 🧪 Testing
+
+### 📋 Testing Documentation
+
+**For Developers & New Agents**:
+- **[Testing Status](docs/TESTING_STATUS.md)** - Complete testing progress, results, and known issues
+- **[Agent Handoff](docs/AGENT_HANDOFF.md)** - Essential guide for new agents working on testing
 
 ### Test Coverage
 
