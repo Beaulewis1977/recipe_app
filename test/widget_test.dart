@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_slot_app/main.dart';
+import 'helpers/test_app.dart';
 
 void main() {
   testWidgets('Recipe Slot App smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      const ProviderScope(
-        child: RecipeSlotApp(),
+      ProviderScope(
+        overrides: createTestProviderOverrides(),
+        child: const RecipeSlotApp(),
       ),
     );
 
@@ -26,8 +28,9 @@ void main() {
 
   testWidgets('Bottom navigation test', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const ProviderScope(
-        child: RecipeSlotApp(),
+      ProviderScope(
+        overrides: createTestProviderOverrides(),
+        child: const RecipeSlotApp(),
       ),
     );
 

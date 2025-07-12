@@ -129,6 +129,8 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
   }
 
   Widget _buildSlotLayout(ScreenSize screenSize, bool isCompact) {
+    final spacing = screenSize.isMobile ? 8.0 : 12.0;
+
     if (isCompact) {
       // Vertical layout for mobile - stack slots vertically
       return Column(
@@ -139,24 +141,27 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
               items: _cuisineTypes,
               target: widget.isSpinning ? _cuisineTarget : 0,
               isSpinning: widget.isSpinning,
+              screenSize: screenSize,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: spacing),
           Expanded(
             child: _buildSlotColumn(
               title: 'Meal Type',
               items: _mealTypes,
               target: widget.isSpinning ? _mealTarget : 0,
               isSpinning: widget.isSpinning,
+              screenSize: screenSize,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: spacing),
           Expanded(
             child: _buildSlotColumn(
               title: 'Time',
               items: _cookingTimes,
               target: widget.isSpinning ? _timeTarget : 0,
               isSpinning: widget.isSpinning,
+              screenSize: screenSize,
             ),
           ),
         ],
@@ -171,6 +176,7 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
               items: _cuisineTypes,
               target: widget.isSpinning ? _cuisineTarget : 0,
               isSpinning: widget.isSpinning,
+              screenSize: screenSize,
             ),
           ),
           const SizedBox(width: 16),
@@ -180,6 +186,7 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
               items: _mealTypes,
               target: widget.isSpinning ? _mealTarget : 0,
               isSpinning: widget.isSpinning,
+              screenSize: screenSize,
             ),
           ),
           const SizedBox(width: 16),
@@ -189,6 +196,7 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
               items: _cookingTimes,
               target: widget.isSpinning ? _timeTarget : 0,
               isSpinning: widget.isSpinning,
+              screenSize: screenSize,
             ),
           ),
         ],
@@ -201,18 +209,21 @@ class _SlotMachineWidgetState extends State<SlotMachineWidget> {
     required List<String> items,
     required int target,
     required bool isSpinning,
+    required ScreenSize screenSize,
   }) {
+    final titleSpacing = screenSize.isMobile ? 2.0 : 8.0;
+
     return Column(
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 14,
+          style: TextStyle(
+            fontSize: screenSize.isMobile ? 12 : 14,
             fontWeight: FontWeight.w600,
             color: Colors.grey,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: titleSpacing),
         Expanded(
           child: Container(
             decoration: BoxDecoration(

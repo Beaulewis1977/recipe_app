@@ -3,6 +3,128 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:recipe_slot_app/theme/app_theme.dart';
+import 'package:recipe_slot_app/models/recipe.dart';
+import 'package:recipe_slot_app/models/settings.dart';
+import 'package:recipe_slot_app/providers/recipe_provider.dart';
+
+/// Creates mock recipe data for testing
+List<Recipe> createMockRecipes(int count) {
+  return List.generate(count, (index) => Recipe(
+    id: index,
+    title: 'Mock Recipe $index',
+    image: 'https://example.com/image$index.jpg',
+    readyInMinutes: 30,
+    servings: 4,
+    summary: 'A delicious mock recipe for testing purposes.',
+    instructions: ['Mock cooking instructions.'],
+    ingredients: [
+      Ingredient(
+        id: index * 10,
+        name: 'Mock Ingredient $index',
+        original: 'Mock Ingredient $index',
+        amount: 1.0,
+        unit: 'cup',
+      ),
+    ],
+    cuisines: ['Mock Cuisine'],
+    dishTypes: ['Mock Dish'],
+    diets: [],
+    vegetarian: false,
+    vegan: false,
+    glutenFree: false,
+    dairyFree: false,
+    healthScore: 80,
+    sourceUrl: 'https://example.com',
+    savedAt: null,
+    triedAt: null,
+  ));
+}
+
+/// Mock notifier for saved recipes that doesn't use Hive
+class MockSavedRecipesNotifier extends StateNotifier<List<Recipe>> {
+  MockSavedRecipesNotifier() : super([]);
+
+  void saveRecipe(Recipe recipe) {
+    final savedRecipe = recipe.copyWith(savedAt: DateTime.now());
+    state = [...state, savedRecipe];
+  }
+
+  void removeRecipe(int recipeId) {
+    state = state.where((recipe) => recipe.id != recipeId).toList();
+  }
+
+  bool isRecipeSaved(int recipeId) {
+    return state.any((recipe) => recipe.id == recipeId);
+  }
+}
+
+/// Mock notifier for tried recipes that doesn't use Hive
+class MockTriedRecipesNotifier extends StateNotifier<List<Recipe>> {
+  MockTriedRecipesNotifier() : super([]);
+
+  void markAsTried(Recipe recipe) {
+    final triedRecipe = recipe.copyWith(triedAt: DateTime.now());
+    state = [...state, triedRecipe];
+  }
+
+  void removeFromTried(int recipeId) {
+    state = state.where((recipe) => recipe.id != recipeId).toList();
+  }
+
+  bool isRecipeTried(int recipeId) {
+    return state.any((recipe) => recipe.id == recipeId);
+  }
+}
+
+/// Mock notifier for user settings that doesn't use Hive
+class MockUserSettingsNotifier extends StateNotifier<UserSettings> {
+  MockUserSettingsNotifier() : super(UserSettings.defaultSettings);
+
+  void updateApiKey(String apiKey) {
+    state = state.copyWith(apiKey: apiKey);
+  }
+
+  void updateAllergies(List<String> allergies) {
+    state = state.copyWith(allergies: allergies);
+  }
+
+  void updateDiets(List<String> diets) {
+    state = state.copyWith(diets: diets);
+  }
+
+  void updateCuisines(List<String> cuisines) {
+    state = state.copyWith(cuisines: cuisines);
+  }
+
+  void updateExcludeIngredients(List<String> excludeIngredients) {
+    state = state.copyWith(excludeIngredients: excludeIngredients);
+  }
+
+  void updateMaxReadyTime(int maxReadyTime) {
+    state = state.copyWith(maxReadyTime: maxReadyTime);
+  }
+
+  void toggleDarkMode() {
+    state = state.copyWith(darkMode: !state.darkMode);
+  }
+}
+
+/// Creates provider overrides for testing following Riverpod best practices
+List<Override> createTestProviderOverrides() {
+  return [
+    // Override random recipes provider with mock data
+    randomRecipesProvider.overrideWith((ref, count) async {
+      // Return mock recipes for testing
+      return createMockRecipes(count);
+    }),
+
+    // Override ingredient search provider with mock data
+    ingredientSearchProvider.overrideWith((ref, ingredients) async {
+      // Return mock recipes for testing
+      return createMockRecipes(3);
+    }),
+  ];
+}
 
 /// Test app wrapper that provides a complete testing environment
 /// for widgets with Riverpod state management, theming, and network mocking.
@@ -55,7 +177,7 @@ Future<void> pumpTestApp(
     });
   }
 
-  // Pump the widget directly
+  // Pump the widget with provider overrides
   await tester.pumpWidget(
     TestApp(
       overrides: overrides,

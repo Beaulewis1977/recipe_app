@@ -44,14 +44,14 @@ class _SpinModeScreenState extends ConsumerState<SpinModeScreen> {
                     padding: EdgeInsets.all(padding),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'Spin for Random Recipes!',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: screenSize.isMobile ? 20 : 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenSize.isMobile ? 12 : 20),
                   Expanded(
                     child: SlotMachineWidget(
                       isSpinning: _isSpinning,
@@ -63,7 +63,7 @@ class _SpinModeScreenState extends ConsumerState<SpinModeScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenSize.isMobile ? 12 : 20),
                   ElevatedButton(
                     onPressed: _isSpinning ? null : _startSpin,
                     style: ElevatedButton.styleFrom(
